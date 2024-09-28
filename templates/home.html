@@ -1,0 +1,34 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWaste Analyzer</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>TechWaste Analyzer</h1>
+        <p>Your solution for e-waste management and segregation</p>
+    </header>
+
+    <main>
+        <section id="upload-section">
+            <img src="https://media.istockphoto.com/id/1390051517/vector/e-waste-recycling-concept-recycle-sign-with-microchip-components.jpg?s=612x612&w=0&k=20&c=yj5cVRJ3FuS4N9I5FcVnGkJ91eSphQFo2kR1G9DxtR0=" alt="TechWaste Image" id="tech-waste-image">
+
+            <h2>Upload your e-waste image</h2>
+            <p>Select an image of the e-waste item you'd like to analyze.</p>
+            <form id="upload-form" method="POST" enctype= "multipart/form-data">
+                {% csrf_token %}
+				{{ form }}
+                <input type="submit" id="analyze-button" value="analyze-button">
+            </form>
+			{% if img_obj %}
+                 <h5>Analyse Image:</h5>
+                <img src="{{ img_obj.image.url }}" id="image-preview" alt="Image Preview">
+                <h4>Result: {{ result }}</h4>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
